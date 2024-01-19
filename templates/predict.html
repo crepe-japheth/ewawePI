@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block main %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Prediction Input:</h5>
+                <div>Bathrooms: <span id="bt"></span></div>
+                <div>Bedrooms: <span id="br"></span></div>
+                <div>Land size: <span id="ls"></span></div>
+                <div>Furnished: <span id="fu"></span></div>
+                <div>Province: <span id="pr"></span></div>
+                <div>District: <span id="di"></span></div>
+                <div>Sector: <span id="se"></span></div>
+                <h5 class="pt-3">Prediction Price:</h5>
+                <div id="prediction"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <h1>House Price Index Prediction</h1>
+            <form action="" id="post-form" class="row">
+                {% csrf_token %}
+                <div class="form-group col-md-6">
+                    <label for="bedrooms">Bedrooms</label>
+                    <!-- <input type="range" step="0.1" min="0" max="5" class="form-control-range" id="bedrooms" placeholder="" required> -->
+                    <select class="form-select form-control" id="bedrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="bathrooms">Bathrooms</label>
+                    <!-- <input type="number" step="0.1" class="form-control" id="bathrooms" placeholder="" required> -->
+                    <select class="form-select form-control" id="bathrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="land_size">Land size in (M<sup>2</sup>)</label>
+                    <input type="number" step="0.1" class="form-control" id="land_size" placeholder="" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="furnished">Furnished</label>
+                    <!-- <input type="text" step="0.1" class="form-control" id="furnished" placeholder="" required> -->
+                    <select class="form-select form-control" id="furnished">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="province">Province</label>
+                    <!-- <input type="text" step="0.1" class="form-control" id="province" placeholder="" required> -->
+                    <select class="form-select form-control" id="province">
+                        <option value="Kigali City">Kigali City</option>
+                        <option value="Eastern">Eastern Province</option>
+                        <option value="Western">Western Province</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="district">District</label>
+                    <!-- <input type="text" step="0.1" class="form-control" id="district" placeholder="" required> -->
+                    <select class="form-select form-control" id="district">
+                        <option value="Nyarugenge">Nyarugenge</option>
+                        <option value="Gasabo">Gasabo</option>
+                        <option value="Kicukiro">Kicukiro</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="sector">Sector</label>
+                    <!-- <input type="text" step="0.1" class="form-control" id="sector" placeholder="" required> -->
+                    <select class="form-select form-control" id="sector">
+                        <option value="Kimihurura">Kimihurura</option>
+                        <option value="Gacuriro">Gacuriro</option>
+                        <option value="Kimironko">Kimironko</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('submit', '#post-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "predict:submit_prediction" %}',
+            data:{
+                bedrooms:$('#bathrooms').val(),
+                bathrooms:$('#bedrooms').val(),
+                land_size:$('#land_size').val(),
+                furnished:$('#furnished').val(),
+                province:$('#province').val(),
+                district:$('#district').val(),
+                sector:$('#sector').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json) {
+                document.forms["post-form"].reset();
+                document.getElementById("prediction").innerHTML = json['result']
+                document.getElementById("bt").innerHTML = json['bedrooms']
+                document.getElementById("br").innerHTML = json['bathrooms']
+                document.getElementById("ls").innerHTML = json['land_size']
+                document.getElementById("fu").innerHTML = json['furnished']
+                document.getElementById("pr").innerHTML = json['province']
+                document.getElementById("di").innerHTML = json['district']
+                document.getElementById("se").innerHTML = json['sector']
+            },
+            error : function(xhr,errmsg,err) {
+
+            }
+        });
+    })
+</script>
+
+{% endblock %}
+
