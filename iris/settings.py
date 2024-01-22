@@ -52,8 +52,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'iris.wsgi.application'
 
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://housepriceindex.up.railway.app']
+# ALLOWED_HOSTS = ['*']
+# CSRF_TRUSTED_ORIGINS = []
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
