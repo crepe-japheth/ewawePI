@@ -45,7 +45,6 @@ def predict_chances(request):
 
         classification = result[0]
         PredResults.objects.create(bedrooms=bedrooms, bathrooms=bathrooms, land_size=land_size, furnished=furnished, province=province, district=district, sector=sector, prediction=classification)
-
         return JsonResponse({'result': classification.item(), 'bedrooms': bedrooms,
                              'bathrooms': bathrooms, 'land_size': land_size, 'furnished': furnished, 'province':province, 'district':district, 'sector':sector},
                             safe=False)
@@ -85,7 +84,7 @@ def predict_chance_sales(request):
         PredResultSales.objects.create(bedrooms=bedrooms, bathrooms=bathrooms, province=province, district=district, sector=sector,area=area, prediction=classification)
 
         return JsonResponse({'result': classification.item(), 'bedrooms': bedrooms,
-                             'bathrooms': bathrooms, 'province':province, 'district':district, 'sector':sector, 'area':area},
+                             'bathrooms': bathrooms, 'province':province, 'district':district, 'sector':sector, 'area':area, 'X-Content-Type-Options':'nosniff', 'Cache-Control':'public, max-age=3600'},
                             safe=False)
 
 

@@ -6,12 +6,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+                <h5 class="modal-title text-dark" id="exampleModalLabel">Prediction Results</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-dark">
                 <h5>Prediction Input:</h5>
                 <div>Bathrooms: <span id="bt"></span></div>
                 <div>Bedrooms: <span id="br"></span></div>
@@ -25,7 +25,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+                <a class="btn btn-primary" href="{% url 'predict:results' %}" role="button">View DB</a>
             </div>
         </div>
     </div>
@@ -39,7 +39,6 @@
                 {% csrf_token %}
                 <div class="form-group col-md-6">
                     <label for="bedrooms">Bedrooms</label>
-                    <!-- <input type="range" step="0.1" min="0" max="5" class="form-control-range" id="bedrooms" placeholder="" required> -->
                     <select class="form-select form-control" id="bedrooms">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -50,7 +49,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="bathrooms">Bathrooms</label>
-                    <!-- <input type="number" step="0.1" class="form-control" id="bathrooms" placeholder="" required> -->
                     <select class="form-select form-control" id="bathrooms">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -65,7 +63,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="furnished">Furnished</label>
-                    <!-- <input type="text" step="0.1" class="form-control" id="furnished" placeholder="" required> -->
                     <select class="form-select form-control" id="furnished">
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -73,7 +70,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="province">Province</label>
-                    <!-- <input type="text" step="0.1" class="form-control" id="province" placeholder="" required> -->
                     <select class="form-select form-control" id="province">
                         <option value="Kigali City">Kigali City</option>
                         <option value="Eastern">Eastern Province</option>
@@ -82,7 +78,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="district">District</label>
-                    <!-- <input type="text" step="0.1" class="form-control" id="district" placeholder="" required> -->
                     <select class="form-select form-control" id="district">
                         <option value="Nyarugenge">Nyarugenge</option>
                         <option value="Gasabo">Gasabo</option>
@@ -91,7 +86,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="sector">Sector</label>
-                    <!-- <input type="text" step="0.1" class="form-control" id="sector" placeholder="" required> -->
                     <select class="form-select form-control" id="sector">
                         <option value="Kimihurura">Kimihurura</option>
                         <option value="Gacuriro">Gacuriro</option>
@@ -113,8 +107,8 @@
             type:'POST',
             url:'{% url "predict:submit_prediction" %}',
             data:{
-                bedrooms:$('#bathrooms').val(),
-                bathrooms:$('#bedrooms').val(),
+                bedrooms:$('#bedrooms').val(),
+                bathrooms:$('#bathrooms').val(),
                 land_size:$('#land_size').val(),
                 furnished:$('#furnished').val(),
                 province:$('#province').val(),
@@ -126,13 +120,15 @@
             success:function(json) {
                 document.forms["post-form"].reset();
                 document.getElementById("prediction").innerHTML = json['result']
-                document.getElementById("bt").innerHTML = json['bedrooms']
-                document.getElementById("br").innerHTML = json['bathrooms']
+                document.getElementById("br").innerHTML = json['bedrooms']
+                document.getElementById("bt").innerHTML = json['bathrooms']
                 document.getElementById("ls").innerHTML = json['land_size']
                 document.getElementById("fu").innerHTML = json['furnished']
                 document.getElementById("pr").innerHTML = json['province']
                 document.getElementById("di").innerHTML = json['district']
                 document.getElementById("se").innerHTML = json['sector']
+
+                console.log(document.getElementById("ls").innerHTML)
             },
             error : function(xhr,errmsg,err) {
 
