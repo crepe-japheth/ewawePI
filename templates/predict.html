@@ -145,7 +145,7 @@
         e.preventDefault();
         $.ajax({
             type:'POST',
-            url:'{% url "predict:submit_prediction" %}',
+            url:'{% url "submit_prediction" %}',
             data:{
                 bedrooms:$('#bedrooms').val(),
                 bathrooms:$('#bathrooms').val(),
