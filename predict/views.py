@@ -81,9 +81,9 @@ def predict_chance_sales(request):
         result = model.predict(df)
         print(result)
         classification = result[0]
-        PredResultSales.objects.create(bedrooms=bedrooms, bathrooms=bathrooms, province=province, district=district, sector=sector,area=area, prediction=classification)
-
-        return JsonResponse({'result': classification.item(), 'bedrooms': bedrooms,
+        PredResultSales.objects.create(property_type=property_type ,bedrooms=bedrooms, bathrooms=bathrooms, province=province, district=district, sector=sector,area=area, prediction=classification)
+        print(property_type)
+        return JsonResponse({'result': classification.item(), 'bedrooms': bedrooms,             'property_type':property_type,
                              'bathrooms': bathrooms, 'province':province, 'district':district, 'sector':sector, 'area':area, 'X-Content-Type-Options':'nosniff', 'Cache-Control':'public, max-age=3600'},
                             safe=False)
 

@@ -17,7 +17,7 @@ class PredResults(models.Model):
     prediction=models.FloatField()
 
     def __str__(self):
-        return self.prediction
+        return str(self.prediction)
     
 class PredResultSales(models.Model):
 
@@ -31,4 +31,4 @@ class PredResultSales(models.Model):
     prediction=models.FloatField()
 
     def __str__(self):
-        return self.prediction
+        return str(self.prediction)

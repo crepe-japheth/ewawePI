@@ -16,8 +16,6 @@
                 <div>Property Type: <span id="pt"></span></div>
                 <div>Bathrooms: <span id="bt"></span></div>
                 <div>Bedrooms: <span id="br"></span></div>
-                <!-- <div>Land size: <span id="ls"></span></div>
-                <div>Furnished: <span id="fu"></span></div> -->
                 <div>Province: <span id="pr"></span></div>
                 <div>District: <span id="di"></span></div>
                 <div>Sector: <span id="se"></span></div>
@@ -27,7 +25,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+                <a class="btn btn-primary" href="{% url 'predict:sales_result' %}" role="button">View DB</a>
             </div>
         </div>
     </div>
@@ -42,9 +40,10 @@
                 <div class="form-group col-md-6">
                     <label for="property-type">Property Type</label>
                     <select class="form-select form-control" id="property-type">
-                        <option value="Apartment">Apartment</option>
                         <option value="House">House</option>
-                        <option value="Land">Land</option>
+                        <option value="Apartment">Apartment</option>
+                        <!-- <option value="Land">Land</option>
+                        <option value="Commerce">Commerce</option> -->
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -55,6 +54,11 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="5">6</option>
+                        <option value="5">7</option>
+                        <option value="5">8</option>
+                        <option value="5">9</option>
+                        <option value="5">10</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -65,6 +69,11 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="5">6</option>
+                        <option value="5">7</option>
+                        <option value="5">8</option>
+                        <option value="5">9</option>
+                        <option value="5">10</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -72,15 +81,15 @@
                     <select class="form-select form-control" id="province">
                         <option value="Kigali City">Kigali City</option>
                         <option value="Eastern">Eastern Province</option>
-                        <option value="Western">Western Province</option>
                       </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="district">District</label>
                     <select class="form-select form-control" id="district">
-                        <option value="Nyarugenge">Nyarugenge</option>
                         <option value="Gasabo">Gasabo</option>
+                        <option value="Nyarugenge">Nyarugenge</option>
                         <option value="Kicukiro">Kicukiro</option>
+                        <option value="Bugesera">Bugesera</option>
                       </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -89,6 +98,26 @@
                         <option value="Kimihurura">Kimihurura</option>
                         <option value="Gacuriro">Gacuriro</option>
                         <option value="Kimironko">Kimironko</option>
+                        <option value="Remera">Remera</option>
+                        <option value="Rwezamenyo">Rwezamenyo</option>
+                        <option value="Nyarugenge">Nyarugenge</option>
+                        <option value="Gatenga">Gatenga</option>
+                        <option value="Kigali">Kigali</option>
+                        <option value="Gatsata">Gatsata</option>
+                        <option value="Ndera">Ndera</option>
+                        <option value="Ntarama">Ntarama</option>
+                        <option value="Kigarama">Kigarama</option>
+                        <option value="Rilima">Rilima</option>
+                        <option value="Kanombe">Kanombe</option>
+                        <option value="Kacyiru">Kacyiru</option>
+                        <option value="Niboye">Niboye</option>
+                        <option value="Gahanga">Gahanga</option>
+                        <option value="Bumbogo">Bumbogo</option>
+                        <option value="Kicukiro">Kicukiro</option>
+                        <option value="Kagarama">Kagarama</option>
+                        <option value="Gashora">Gashora</option>
+                        <option value="Muhima">Muhima</option>
+                        <option value="Kinyinya">Kinyinya</option>
                       </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -131,6 +160,7 @@
                 document.getElementById("di").innerHTML = json['district']
                 document.getElementById("se").innerHTML = json['sector']
                 document.getElementById("ar").innerHTML = json['area']
+            
             },
             error : function(xhr,errmsg,err) {
 
