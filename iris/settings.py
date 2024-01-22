@@ -5,7 +5,9 @@ SECRET_KEY = '*e-vifgtz8^38rhj*x%&-k_&vs+v*24g1r_+#6atve@scpwylo'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ORIGINS = ['https://ewawehpi.onrender.com']
+
 
 
 # Application definition
