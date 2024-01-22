@@ -137,7 +137,7 @@
         e.preventDefault();
         $.ajax({
             type:'POST',
-            url:'{% url "predict:submit_sales_prediction" %}',
+            url:'{% url "submit_sales_prediction" %}',
             data:{
                 property_type:$('#property-type').val(),
                 bedrooms:$('#bathrooms').val(),
