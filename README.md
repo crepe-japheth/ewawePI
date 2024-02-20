@@ -5,19 +5,19 @@
 The House Price Prediction Web App is a Django-based application designed to provide users with predictions for house rent and sales prices in Rwanda. It utilizes machine learning models trained on historical data to make predictions.
 
 ### Folder Structure
-- ** iris/ **: The project folder.
-- ** predict/: The app folder containing views and database schemas.
-- ** templates/: Contains HTML templates for the web pages.
-- ** db.sqlite3: SQLite database file for storing data.
-- ** manage.py: Django management script for running administrative tasks.
-- ** rent_model.pickle: Pickled machine learning model for predicting house rent prices.
-- ** sales_model.pickle: Pickled machine learning model for predicting house sales prices.
-- ** requirements.txt: List of Python dependencies required for the project.
-- ** runtime.txt: Specifies the Python version used in the project.
-- ** Procfile: Specifies the commands that are executed by the app on Render.
+- **iris/**: The project folder.
+- **predict/:** The app folder containing views and database schemas.
+- **templates/:** Contains HTML templates for the web pages.
+- **db.sqlite3:** SQLite database file for storing data.
+- **manage.py:** Django management script for running administrative tasks.
+- **rent_model.pickle:** Pickled machine learning model for predicting house rent prices.
+- **sales_model.pickle:** Pickled machine learning model for predicting house sales prices.
+- **requirements.txt:** List of Python dependencies required for the project.
+- **runtime.txt:** Specifies the Python version used in the project.
+- **Procfile:** Specifies the commands that are executed by the app on Render.
 ## Deployment
 Hosting Platform
-The web app is hosted on Render `https://ewawehpi.onrender.com/`, a cloud platform for deploying and scaling web applications but ** not forever **.
+The web app is hosted on Render `https://ewawehpi.onrender.com/`, a cloud platform for deploying and scaling web applications but **not forever**.
 
 # To run it locally. Steps:
 
